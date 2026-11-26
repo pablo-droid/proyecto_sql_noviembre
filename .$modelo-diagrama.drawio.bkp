@@ -1,6 +1,6 @@
 <mxfile host="Electron" pages="2">
   <diagram name="MODELO_LOGICO" id="EwHl16aPxN5WpxbQkTEp">
-    <mxGraphModel dx="1104" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1199" dy="639" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -466,7 +466,7 @@
         <mxCell id="xR5ucy7fMIJ7yj203ZLL-14" edge="1" parent="FX-tYCEhfYCgvaVtYp0e-1" source="xR5ucy7fMIJ7yj203ZLL-13" style="endArrow=none;html=1;rounded=0;" target="xR5ucy7fMIJ7yj203ZLL-1" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="xR5ucy7fMIJ7yj203ZLL-15" parent="FX-tYCEhfYCgvaVtYp0e-1" style="ellipse;whiteSpace=wrap;html=1;align=center;" value="promocion" vertex="1">
+        <mxCell id="xR5ucy7fMIJ7yj203ZLL-15" parent="FX-tYCEhfYCgvaVtYp0e-1" style="ellipse;whiteSpace=wrap;html=1;align=center;" value="nombre_promocion" vertex="1">
           <mxGeometry height="40" width="145" x="-50" y="240" as="geometry" />
         </mxCell>
         <mxCell id="xR5ucy7fMIJ7yj203ZLL-16" edge="1" parent="FX-tYCEhfYCgvaVtYp0e-1" source="xR5ucy7fMIJ7yj203ZLL-15" style="endArrow=none;html=1;rounded=0;" target="xR5ucy7fMIJ7yj203ZLL-1" value="">

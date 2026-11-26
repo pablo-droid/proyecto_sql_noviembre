@@ -55,3 +55,25 @@ CREATE TABLE Promociones (
 );
 
 ----FALTA CREAR TABLA NOTAS Y ASIGNACION CLAUSTRO
+
+
+CREATE TABLE Notas (
+    id_notas INT PRIMARY KEY,
+    resultado bool,
+	id_alumno INT,
+	id_proyecto INT,
+    FOREIGN KEY (id_alumno) REFERENCES Alumnos(id_alumno),
+    FOREIGN KEY (id_proyecto) REFERENCES Proyectos(id_proyecto)
+);
+
+----FALTA CREAR ASIGNACION CLAUSTRO
+
+	CREATE TABLE Asignacion_Claustro (
+    id_asignacion INT PRIMARY KEY,
+   	id_profesor INT,
+	id_promocion INT,
+	id_modalidad INT,
+    FOREIGN KEY (id_profesor) REFERENCES Profesores(id_profesor),
+    FOREIGN KEY (id_promocion) REFERENCES Promociones(id_promocion),
+	FOREIGN KEY (id_modalidad) REFERENCES Modalidades(id_modalidad)
+);

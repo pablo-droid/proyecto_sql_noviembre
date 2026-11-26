@@ -1,0 +1,57 @@
+-- CREAMOS TABLA ALUMNOS 
+
+CREATE TABLE Alumnos (
+  id_alumno INT PRIMARY KEY,
+  nombre_alumno VARCHAR(100),
+  email VARCHAR(150),
+  id_promocion INT,
+  FOREIGN KEY (id_promocion) REFERENCES Promociones(id_promocion)
+  )
+
+---- CREAMOS TABLA PROFESORES
+
+CREATE TABLE Profesores (
+  id_profesor INT PRIMARY KEY,
+  nombre_profesor VARCHAR(100)
+  )
+ 
+ ---- CREAMOS TABLA MODALIDADES
+
+ CREATE TABLE Modalidades (
+  id_modalidad INT PRIMARY KEY,
+  tipo_modalidad VARCHAR(100)
+  )
+ 
+ ---- CREAMOS TABLA CAMPUS
+
+ 	CREATE TABLE Campus (
+  id_campus INT PRIMARY KEY,
+  nombre_campus VARCHAR(100)
+  )
+
+  ---- CREAMOS TABLA VERTICALES
+
+  	CREATE TABLE Verticales (
+  id_vertical INT PRIMARY KEY,
+  nombre_vertical VARCHAR(100)
+  )
+ 
+   ---- CREAMOS TABLA PROYECTOS
+
+   	CREATE TABLE Proyectos (
+  id_proyecto INT PRIMARY KEY,
+  nombre_proyecto VARCHAR(100)
+  )
+ 
+   ---- CREAMOS TABLA PROMOCIONES
+CREATE TABLE Promociones (
+    id_promocion INT PRIMARY KEY,
+    nombre_promocion VARCHAR(100),
+    fecha_inicio DATE,
+    id_campus INT,
+    id_vertical INT,
+    FOREIGN KEY (id_campus) REFERENCES Campus(id_campus),
+    FOREIGN KEY (id_vertical) REFERENCES Verticales(id_vertical)
+);
+
+----FALTA CREAR TABLA NOTAS Y ASIGNACION CLAUSTRO

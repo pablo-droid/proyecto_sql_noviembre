@@ -1,79 +1,119 @@
--- CREAMOS TABLA ALUMNOS 
+--------------------------------------------------
+-- 1. CREAMOS LAS TABLAS
+--------------------------------------------------
 
+---- CREAMOS TABLA ALUMNOS
 CREATE TABLE Alumnos (
-  id_alumno INT PRIMARY KEY,
-  nombre_alumno VARCHAR(100),
-  email VARCHAR(150),
-  id_promocion INT,
-  FOREIGN KEY (id_promocion) REFERENCES Promociones(id_promocion)
-  )
+    id_alumno INT PRIMARY KEY,
+    nombre_alumno VARCHAR(100),
+    email VARCHAR(150),
+    id_promocion INT
+);
 
 ---- CREAMOS TABLA PROFESORES
-
 CREATE TABLE Profesores (
-  id_profesor INT PRIMARY KEY,
-  nombre_profesor VARCHAR(100)
-  )
- 
- ---- CREAMOS TABLA MODALIDADES
+    id_profesor INT PRIMARY KEY,
+    nombre_profesor VARCHAR(100)
+);
 
- CREATE TABLE Modalidades (
-  id_modalidad INT PRIMARY KEY,
-  tipo_modalidad VARCHAR(100)
-  )
- 
- ---- CREAMOS TABLA CAMPUS
+---- CREAMOS TABLA MODALIDADES
+CREATE TABLE Modalidades (
+    id_modalidad INT PRIMARY KEY,
+    tipo_modalidad VARCHAR(100)
+);
 
- 	CREATE TABLE Campus (
-  id_campus INT PRIMARY KEY,
-  nombre_campus VARCHAR(100)
-  )
+---- CREAMOS TABLA CAMPUS
+CREATE TABLE Campus (
+    id_campus INT PRIMARY KEY,
+    nombre_campus VARCHAR(100)
+);
 
-  ---- CREAMOS TABLA VERTICALES
+---- CREAMOS TABLA VERTICALES
+CREATE TABLE Verticales (
+    id_vertical INT PRIMARY KEY,
+    nombre_vertical VARCHAR(100)
+);
 
-  	CREATE TABLE Verticales (
-  id_vertical INT PRIMARY KEY,
-  nombre_vertical VARCHAR(100)
-  )
- 
-   ---- CREAMOS TABLA PROYECTOS
+---- CREAMOS TABLA PROYECTOS
+CREATE TABLE Proyectos (
+    id_proyecto INT PRIMARY KEY,
+    nombre_proyecto VARCHAR(100)
+);
 
-   	CREATE TABLE Proyectos (
-  id_proyecto INT PRIMARY KEY,
-  nombre_proyecto VARCHAR(100)
-  )
- 
-   ---- CREAMOS TABLA PROMOCIONES
+---- CREAMOS TABLA PROMOCIONES
 CREATE TABLE Promociones (
     id_promocion INT PRIMARY KEY,
     nombre_promocion VARCHAR(100),
     fecha_inicio DATE,
     id_campus INT,
-    id_vertical INT,
-    FOREIGN KEY (id_campus) REFERENCES Campus(id_campus),
-    FOREIGN KEY (id_vertical) REFERENCES Verticales(id_vertical)
+    id_vertical INT
 );
 
-----FALTA CREAR TABLA NOTAS Y ASIGNACION CLAUSTRO
-
-
+---- CREAMOS TABLA NOTAS
 CREATE TABLE Notas (
     id_notas INT PRIMARY KEY,
-    resultado bool,
-	id_alumno INT,
-	id_proyecto INT,
-    FOREIGN KEY (id_alumno) REFERENCES Alumnos(id_alumno),
-    FOREIGN KEY (id_proyecto) REFERENCES Proyectos(id_proyecto)
+    resultado BOOL,
+    id_alumno INT,
+    id_proyecto INT
 );
 
-----FALTA CREAR ASIGNACION CLAUSTRO
-
-	CREATE TABLE Asignacion_Claustro (
+---- CREAMOS TABLA ASIGNACION CLAUSTRO
+CREATE TABLE Asignacion_Claustro (
     id_asignacion INT PRIMARY KEY,
-   	id_profesor INT,
-	id_promocion INT,
-	id_modalidad INT,
-    FOREIGN KEY (id_profesor) REFERENCES Profesores(id_profesor),
-    FOREIGN KEY (id_promocion) REFERENCES Promociones(id_promocion),
-	FOREIGN KEY (id_modalidad) REFERENCES Modalidades(id_modalidad)
+    id_profesor INT,
+    id_promocion INT,
+    id_modalidad INT
 );
+
+--------------------------------------------------
+-- 2. CORRECCIONES
+--------------------------------------------------
+
+--RENOMBRAMOS LA COLUMNA NOMBRE_CAMPUS
+ALTER TABLE Campus RENAME COLUMN nombre_campus TO ciudad;
+
+--RENOMBRAMOS LA COLUMNA NOMBRE_VERTICAL
+ALTER TABLE Verticales RENAME COLUMN nombre_vertical TO nombre_curso;
+
+--CAMBIAMOS TIPO DE DATOS
+ALTER TABLE Notas ALTER COLUMN resultado TYPE VARCHAR(10) USING resultado::VARCHAR;
+
+--AÑADIMOS ROL
+ALTER TABLE Asignacion_Claustro ADD COLUMN rol VARCHAR(10);
+
+--RENOMBRAMOS TABLA ASIGNACION CLAUSTRO
+ALTER TABLE Asignacion_Claustro RENAME TO Asignaciones_Claustro;
+
+--AÑADIMOS ID_VERTICAL A PROYECTOS
+ALTER TABLE Proyectos ADD COLUMN id_vertical INT;
+
+--------------------------------------------------
+-- 3. CREAMOS LAS RELACIONES (después de insertar los datos)
+--------------------------------------------------
+
+--PROMOCIONES - CAMPUS
+ALTER TABLE Promociones ADD FOREIGN KEY (id_campus) REFERENCES Campus(id_campus);
+
+--PROMOCIONES - VERTICALES
+ALTER TABLE Promociones ADD FOREIGN KEY (id_vertical) REFERENCES Verticales(id_vertical);
+
+--ALUMNOS - PROMOCIONES
+ALTER TABLE Alumnos ADD FOREIGN KEY (id_promocion) REFERENCES Promociones(id_promocion);
+
+--PROYECTOS - VERTICALES
+ALTER TABLE Proyectos ADD FOREIGN KEY (id_vertical) REFERENCES Verticales(id_vertical);
+
+--ASIGNACIONES_CLAUSTRO - PROFESORES
+ALTER TABLE Asignaciones_Claustro ADD FOREIGN KEY (id_profesor) REFERENCES Profesores(id_profesor);
+
+--ASIGNACIONES_CLAUSTRO - PROMOCIONES
+ALTER TABLE Asignaciones_Claustro ADD FOREIGN KEY (id_promocion) REFERENCES Promociones(id_promocion);
+
+--ASIGNACIONES_CLAUSTRO - MODALIDADES
+ALTER TABLE Asignaciones_Claustro ADD FOREIGN KEY (id_modalidad) REFERENCES Modalidades(id_modalidad);
+
+--NOTAS - ALUMNOS
+ALTER TABLE Notas ADD FOREIGN KEY (id_alumno) REFERENCES Alumnos(id_alumno);
+
+--NOTAS - PROYECTOS
+ALTER TABLE Notas ADD FOREIGN KEY (id_proyecto) REFERENCES Proyectos(id_proyecto);

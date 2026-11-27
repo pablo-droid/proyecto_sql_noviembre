@@ -2,6 +2,9 @@
 
 Base de datos relacional en **PostgreSQL**, alojada en **Render**, creada a partir de los datos sin normalizar de una escuela de bootcamps: alumnos de Data Science y Full Stack, sus notas y el claustro de profesores.
 
+##VARIABLES DE ENTORNO
+- Crea un archivo `.env` y introduce el path a render en una variable llamada DATABASE_URL
+
 ---
 
 ## 1. Modelo Entidad-Relación
